@@ -1,0 +1,48 @@
+<table class="table" [class.placeholder]="listando">
+  <thead>
+    <tr>
+      <th scope="col">COD</th>
+      <th scope="col">Nome</th>
+      <th scope="col">CPF</th>
+      <th scope="col">DataNascimento</th>
+      <th scope="col">Contatos</th>
+      <th scope="col">Atualizar</th>
+      <th scope="col">Remover</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pessoa of pessoas; let i = index">
+      <th scope="row">{{ i + 1 }}</th>
+      <td>{{ pessoa.nome }}</td>
+      <td>{{ pessoa.cpf }}</td>
+      <td>{{ pessoa.dataNascimento }}</td>
+      <div *ngFor="let contato of pessoa.contatos; let j = index">
+        <hr />
+        <tr>
+          <td>Nome: {{ pessoa.contatos[j].nome }}</td>
+        </tr>
+        <tr>
+          <td>Telefone: {{ pessoa.contatos[j].telefone }}</td>
+        </tr>
+        <tr>
+          <td>Email: {{ pessoa.contatos[j].email }}</td>
+        </tr>
+      </div>
+      <td>
+        <button class="btn-primary" [routerLink]="['/pessoa', pessoa._id]">
+          Atualizar
+        </button>
+      </td>
+      <td>
+        <button class="btn-secundary" (click)="remover(pessoa._id)">
+          Remover
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="col placeholder">
+  <button class="btn-primary" routerLink="/pessoa/novo">
+    Cadastrar pessoa
+  </button>
+</div>
